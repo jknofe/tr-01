@@ -1,0 +1,416 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Foxed.ca
+       - Rotary Compression Calculator    </title>
+<script src="/cdn-cgi/apps/head/5PApPaY9dLUes0In53Ta4S1_1nY.js"></script><style type="text/css">body {
+	font:normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : black;
+	min-width: 875px;
+	max-width: 1200px;
+	margin-left: auto; 
+	margin-right: auto; 
+	padding-top: 5px; 
+	padding-bottom: 5px;
+}
+
+a:link.current {
+	color:#999999;
+	text-decoration:none;
+	font-weight: bold
+}
+
+a:link {
+	color:#0693B5;
+	text-decoration:none;
+}
+
+a:visited {
+	color:#b52806;
+	text-decoration:none;
+}
+
+a:visited.current {
+	color:#999999;
+	text-decoration:none;
+	font-weight: bold
+}
+
+a:hover {
+	color:#03495a;
+	text-decoration:none;
+}
+
+a:active {
+	background:white;
+	color:#BC2208;
+	text-decoration:none;
+} 
+  
+.content {
+	background:#F2F2F2;
+	border:1px solid #999999;
+	padding:10px;
+	font:normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:3px;
+}
+
+#sub-header { 
+	background: url(images/engr.png) top right no-repeat;
+	min-height: 265px;
+	padding: 0 390px 0px 0;
+}
+
+#sub-header h2 { 
+	font-size: 40px; 
+	font-weight: bold;
+	margin-top:0px;
+	margin-bottom: 12px; }
+
+.error {
+	background:#fca9a9;
+	border:1px solid #fd5a5a;
+	padding:10px;
+	font:normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:3px;
+}
+
+.note {
+	background:#fdce8e;
+	border:1px solid #d28414;
+	padding:10px;
+	font:normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:3px;
+}
+
+.newsbar {
+	background:#fecccc;
+	border:1px solid #bf2626;
+	padding:10px;
+	font: bold 20px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-variant: small-caps;	
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:7px;
+	margin-bottom:3px;
+}
+
+.newsadmin {
+	background:#F2F2F2;
+	border-right:1px solid #999999;
+	border-left:1px solid #999999;
+	border-bottom:1px solid #999999;
+	padding:0px;
+	font:normal 8px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align: center;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:-4px;
+	margin-bottom:3px;
+}
+
+.donate {
+	background:#b0e4f1;
+	border:1px solid #0693B5;
+	padding:0px;
+	font:normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-left:0px;
+ 	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:3px;
+}
+
+#header { 
+	text-align:left;
+	background: #E3E3E3 url(images/header.png) no-repeat left;
+	height: 104px;
+	border:1px solid #999999;
+	padding:0px !important;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:10px;
+	position: relative;
+	
+}
+	#header a:hover, #header a.current { color: #03495a; background: url(images/menu.png) no-repeat center bottom; }
+	
+	#header ul { position: absolute; bottom: -13px; right: 0px; }
+	#header ul li{ display: inline; }
+	#header ul li a{ display: block; float: left; font-size: 14px; color: #000; text-decoration: none; text-transform: uppercase; padding: 0px 10px; border-right: 1px solid #999999; padding-bottom: 5px; }
+	#header ul li.last-item a { padding-right: 10px; padding-bottom: 5px; border: none; }
+	#header ul li.first-item a { padding-left: 0px; padding-bottom: 5px;}
+	#header ul li a.active, #header ul li a.active { font-weight: bold; }
+
+.thanks {
+	background:#F2F2F2;
+	border:1px solid #999999;
+	padding:10px;
+	font:normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:3px;
+}
+
+.thankstitle {
+	text-align:left;
+	background:#E3E3E3;
+	border:1px solid #999999;
+	border-bottom: 0px !important;
+	color:#666666;
+	font: bold 15px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-variant: small-caps;
+	padding:5px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+.title {
+	text-align:left;
+	background:#E3E3E3;
+	border:1px solid #999999;
+	border-bottom: 0px !important;
+	color:#666666;
+	font: bold 15px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-variant: small-caps;
+	padding:5px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+.title2 {
+	text-align:left;
+	background:#E3E3E3;
+	border:1px solid #999999;
+	border-bottom: 0px !important;
+	color:#666666;
+	font: bold 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding:5px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+.status {
+	background:#F2F2F2;
+	font:normal 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+.copyfooter {
+	background:#F2F2F2;
+	border:1px solid #999999;
+	font : normal 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align: center;
+	padding:2px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:10px;
+	margin-bottom:0px;
+  }
+
+.forward {
+	text-align:center;
+	background:#F2F2F2;
+	border:1px solid #999999;
+	padding:10px;
+	font:normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-left:5px;
+	margin-right:5px;
+	margin-top:0px;
+	margin-bottom:5px;
+}
+
+#container ul {
+  list-style-type: none;
+  width: 100%;
+  overflow: visible;
+  height: 100%;
+  padding-left: 0px;
+  }
+
+#container li {
+	display: inline-block;
+	* float: left;
+	padding: 5px;
+	border: 0px;
+	margin: 10px;
+	width: 150px;
+	vertical-align: top;
+	text-align: center;
+  }
+
+
+#opaque {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    display: none;
+    background-color: black;
+    filter: alpha(opacity=40);
+    opacity: 0.6;
+}
+
+table.calc {border: 1px solid black}
+
+
+</style> </head>
+<body>
+
+<div id="header">
+<ul>
+<li class="first-item">
+<a href="index.php">Home</a> </li>
+<li>
+<a href="index.php?page=rx7manual">RX-7 Manuals</a> </li>
+<li>
+<a href="index.php?page=rotorthrobber">Rotor Firefox</a> </li>
+<li>
+<a class="current" href="index.php?page=rotarycalc">Rotary Comp Calc</a> </li>
+<li>
+<a href="cumulus">Weather</a> </li>
+<li class="last-item"><a href="index.php?page=about">About</a></li>
+</ul>
+</div>
+
+
+<noscript>
+  <div class="error">
+   <i><b>For full functionality of this site it is necessary to enable JavaScript.</b>
+   Here are <a href="http://www.enable-javascript.com/" target="_blank">
+   instructions on how to enable JavaScript in your web browser</a>.</i>
+  </div>
+</noscript>
+<script type="3adc19e8182f81e88fdfbc2f-text/javascript">
+if (((navigator.userAgent.indexOf('iPhone') != -1) || (navigator.userAgent.indexOf('iPod') != -1)))
+{
+document.location = "content/rotarycalc.html";
+}
+</script>
+<div class="title">Rotary Compression Calculator</div>
+<div class="content">
+<b>What is it?</b><br /><br />
+The Rotary Compression Calculator is a basic calculator designed to be used with the Twisted Rotors TR-1 or the RotaryCompressionTester RCT-V5 testers.
+Input pressure readings for the three faces of the rotor, along with the altitude and cranking RPM of the test.
+A normalized pressure reading is displayed below, giving the actual compression.<br /><br />
+</div>
+<div class="title2">The Calculator</div>
+<div class="content">
+<script type="3adc19e8182f81e88fdfbc2f-text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="3adc19e8182f81e88fdfbc2f-text/javascript" src="foxed.ca_rotray_calc.js"></script>
+<table cellspacing="0" align="center" class="calc">
+<tbody>
+<tr bgcolor="#fee3ca">
+<td colspan="3">Rotor Faces (PSI):</td>
+</tr>
+<tr bgcolor="#fee3ca">
+<td><label for="face_1">#1: </label><input type="text" size="4" id="face_1" value="0" /></td>
+<td><label for="face_2">#2: </label><input type="text" size="4" id="face_2" value="0" /></td>
+<td><label for="face_3">#3: </label><input type="text" size="4" id="face_3" value="0" /></td>
+</tr>
+<tr bgcolor="#cbe5fe">
+<td colspan="3"><label for="rpm">Cranking RPM: </label><input type="text" size="3" id="rpm" value="250" /></td>
+</tr>
+<tr bgcolor="#fee3ca">
+<td colspan="2"><label for="altitude">Testing Altitude: </label><input type="text" size="3" id="altitude" value="0" /></td>
+<td align="right"><select id="altitude_unit">
+<option>Feet</option>
+<option>Meters</option>
+</select></td>
+</tr>
+<tr bgcolor="#cbe5fe">
+<td>Engine: </td>
+<td colspan="2" align="right">
+<select id="engine_select">
+<option>12A 76-82</option>
+<option>12A 83-85</option>
+<option>13B 74-78</option>
+<option>13B 84-85</option>
+<option>13B NA 86-88</option>
+<option>13B Turbo 86-88</option>
+<option>13B NA 89-92</option>
+<option>13B Turbo 89-92</option>
+<option>13B REW 93-95</option>
+<option>13B Renesis 04-11</option>
+</select>
+</td>
+</tr>
+<tr>
+<td colspan="3" align="center"><br /><button id="convert_button">Normalize Readings</button><br />(Normalized to 250rpm at sea level)<br /><br /></td>
+</tr>
+<tr bgcolor="#fee3ca">
+<td colspan="3"><label for="compression_ratio">Compression Ratio: </label><input type="text" size="3" id="compression_ratio" /></td>
+</tr>
+<tr bgcolor="#cbe5fe">
+<td colspan="2">Normalized Rotor Faces:</td>
+<td align="right">
+<select id="pressure_select">
+<option>PSI</option>
+<option>kPa</option>
+<option>bar</option>
+<option>kg/cm2</option>
+</select>
+</td>
+</tr>
+<tr bgcolor="#cbe5fe">
+<td><label for="result_1">#1: </label><input type="text" size="5" id="result_1" /></td>
+<td><label for="result_2">#2: </label><input type="text" size="5" id="result_2" /></td>
+<td><label for="result_3">#3: </label><input type="text" size="5" id="result_3" /></td>
+</tr>
+<tr>
+<td colspan="3" align="center">
+<button id="copy_button">Copy</button>
+<button id="print_button">Print</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="resultArea" style="display: none;"></div> 
+
+<div class="copyfooter">
+&copy; Copyright 2016 <a href="http://foxed.ca">Foxed.ca</a> Inc. All Rights Reserved.<br />
+Page last updated 02:54:00 PM Aug-24-2016<br />
+Contact the <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#100;&#109;&#105;&#110;&#64;&#102;&#111;&#120;&#101;&#100;&#46;&#99;&#97;">Webmaster</a>. Check Server <a href="index.php?page=serverstatus">Status</a>.
+</div>
+
+
+<script src="/gataglinks.js" type="3adc19e8182f81e88fdfbc2f-text/javascript"></script>
+
+
+<script type="3adc19e8182f81e88fdfbc2f-text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-2949466-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/4f936b58/cloudflare-static/rocket-loader.min.js" data-cf-nonce="3adc19e8182f81e88fdfbc2f-" defer=""></script></body>
+</html>
