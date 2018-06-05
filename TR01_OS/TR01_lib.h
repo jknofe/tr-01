@@ -94,7 +94,7 @@ void TestNormTo250(){
 // 0.5V - 4.5V -> 0psi to 200psi
 int AdcToPres(int x, bool show_bar)
 {
-	// limit adc values, to sensor defined range 0.5 - 4.5V
+	// only accept adc values in sensor defined range 0.5 - 4.5V
 	if( (x < 102) || (x > 922) ){
 		return 0;
 	}
@@ -122,8 +122,10 @@ int AdcToPres(int x, bool show_bar)
 }
 
 
-// apply rotary engine corection factor
+// apply dead space correction factor
 // derived from http://foxed.ca/index.php?page=rotarycalc
+// RECorFact = (camber_displacement + sensor_volume) / camber_displacement
+// initial assumption is that value from foxed are matching, but they need to be verified for own setup
 int RECorFact(int pres, EngineType myengine){
 	long res;
 	switch(myengine){
