@@ -23,6 +23,7 @@ void TestNormTo250();
 int AdcToPres(int,bool);
 int RECorFact(int, EngineType);
 int NormTo250(int, int, EngineType);
+void PrintPres(int, bool);
 
 #if TESTING == 1
 void TestAdcToPres(){
@@ -71,13 +72,13 @@ void TestNormTo250(){
 	Serial.println("Testing: NormTo250()");
 	Serial.print("pres@");
 	Serial.print("\t");
-	for(int rpm=200;rpm<=300;rpm+=10){
+	for(int rpm=125;rpm<=375;rpm+=25){
 	  Serial.print(String(rpm) + "\t");
 	}
 	Serial.println();
 	for(int pres=5000;pres<=8000;pres+=500){
 	  Serial.print(String(pres) + "\t");
-	  for(int rpm=200;rpm<=300;rpm+=10){
+	  for(int rpm=125;rpm<=375;rpm+=25){
 		tmp = NormTo250(pres, rpm, ENGINE_TYPE);
 		Serial.print(String(tmp) + "\t");
 	  }
@@ -165,45 +166,56 @@ int RECorFact(int pres, EngineType myengine){
 // normalize the pressure reuslts to 250rpm
 int NormTo250(int pres, int rpm, EngineType myengine)
 {	
-	long a2; 
-	long a1;
-	long a0;
-	long b0;
-	long res;
+	long a3,a2, a1, a0, b0, cor, res;
+	// do only for valid rpms
+	if( (rpm > 149) && (rpm < 351) )
+	{
+		switch(myengine){
+			case RT_13B_RENESIS_04_11:
+				// form newer RX8 workshop manual, A-B Chart
+				// interpolation {{150, 565}, {200, 715}, {250, 830}, {300, 925}}
+				// plot 0.00002 x^3 - 0.019 x^2 + 7.8 x - 245
+				// (830*50000 / (x^3 - 950 x^2 + 390000 x - 12250000))
+				a3 = (long)rpm*(long)rpm*(long)rpm; 
+				a2 = (-950)*(long)rpm*(long)rpm; 
+				a1 = 390000 * (long)rpm;
+				a0 = -12250000;
+				b0 = 830*50000;		// 830kpa = 8.3bar
+				break;
+			case RT_13B_REW_93_95:
+			case RT_13B_TURBO_89_92:
+			case RT_13B_NA_89_92:
+			case RT_13B_TURBO_86_88:
+			case RT_13B_NA_86_88:
+			case RT_13B_84_85:
+			case RT_13B_74_78:
+			case RT_12A_83_85:
+			case RT_12A_76_82:
+			default:
+				// no  normalization
+				a3 = 1;
+				a2 = 1; 
+				a1 = 1;
+				a0 = 1;
+				b0 = 4000;
+				break;
+		}
 
-	switch(myengine){
-		case RT_13B_RENESIS_04_11:
-			// rpm correction from chart in mazda service manual 4EngineDetails.pdf page 11
-			// quadratic fit {{200, 740}, {250, 850}, {300, 940}}
-			// tranforrmed to factor
-			// plot (850 / (-0.004x^2 + 4x + 100)), x=200...300, y=0.8...1.2
-			// used fixed point calculation
-			a2 = (-4)*(long)rpm*(long)rpm; 
-			a1 = 4000 * (long)rpm;
-			a0 = 100000;
-			b0 = 850000000;
-			break;
-		case RT_13B_REW_93_95:
-		case RT_13B_TURBO_89_92:
-		case RT_13B_NA_89_92:
-		case RT_13B_TURBO_86_88:
-		case RT_13B_NA_86_88:
-		case RT_13B_84_85:
-		case RT_13B_74_78:
-		case RT_12A_83_85:
-		case RT_12A_76_82:
-		default:
-			// no  normalization
-			a2 = 1; 
-			a1 = 1;
-			a0 = 1;
-			b0 = 3000;
-			break;
+		//cor = (b0 - (a3 + a2 + a1 + a0));
+		cor = (a3 + a2 + a1 + a0);
+		// fixed point correction
+		cor /= 1000;
+		cor = b0 / cor;
+		// apply correction to pressure
+		res = (long)pres * cor;
+		// fixed point correction
+		res /= 1000;
 	}
-	// calc result
-	res = (long)pres * (b0 / (a2 + a1 + a0));
-	// fixed point correction
-	res /= 1000; 
+	else
+	{
+		// return for rpm out of range
+		res = 0;
+	}
 	return (int)res;
 }
 
@@ -229,4 +241,14 @@ int NormToSeeLevel(int pres)
 	// fixed point correction
 	res /= 1000; 
 	return (int)res;
+}
+
+// covert fixed points to float for printing
+void PrintPres(int pres, bool show_bar){
+	if(show_bar){
+		Serial.print((float)pres/1000.0,2);
+	}
+	else {
+		Serial.print((float)pres/1000.0,1);
+	}
 }

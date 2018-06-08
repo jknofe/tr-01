@@ -4,7 +4,7 @@ Originally distributed by John Doss 2017
 This code assumes you're using a 0-200 psi - 0.5-4.5 vdc pressure transducer connected to the AI0 pin.
 You can use sensors with other pressure or voltage ranges but you'll need to modify the code.
 */
-#define TESTING 1
+#define TESTING 0
 
 #define SENSOR 0          //Analog input pin that sensor is connected too
 #define ENGINE_TYPE RT_13B_RENESIS_04_11
@@ -53,18 +53,18 @@ void loop(){
   for (i=0; i<3; i++)         //the following code reads the sensor (in psi), looks for a peak pulse, assigns that to one of the faces,
                               //repeats the process for the next 2 faces and then moves on to the rest of the code
   {
-    v = 350 + analogRead(SENSOR);
+    v = 200 + analogRead(SENSOR);
     if (v < 0){v = 0;}
     while ((face[i]-v)<=PEAK_DET)
     {
       if(face[i]<v) face[i]=v;
-      v = 350 + analogRead(SENSOR);
+      v = 200 + analogRead(SENSOR);
       if (v < 0){v = 0;}
     }   
     minimum=v;
     while((v-minimum)<PEAK_DET)
     {
-      v = 350 +  analogRead(SENSOR);
+      v = 200 +  analogRead(SENSOR);
       if (v < 0){v = 0;}
       if (minimum>v) minimum=v;
     }
@@ -80,24 +80,24 @@ void loop(){
 
   // print results captured above
   if(countRev == NUM_REV) {
+    Serial.println("----------------------------");
     Serial.println("# RAW RESULTS:");
     Serial.println("RPM\tR-1\tR-2\tR-3");
     for (i=0; i<NUM_REV; i++){
       Serial.print(results[i][0], DEC);
       Serial.print("\t");
       for (j=1; j<4; j++){
-        // look for max value over all results
-        if(face[j-1] < results[i][j]) face[j-1] = results[i][j];
         // print result
         Serial.print(AdcToPres(results[i][j],SHOWBAR), 1);
         Serial.print("\t");
       }
       Serial.println();
     }
+    Serial.println("----------------------------");
     Serial.println("# @250 corrected RESULTS:");
     Serial.println("RPM\tR-1\tR-2\tR-3");
     for (i=0; i<NUM_REV; i++){
-      Serial.print(i, DEC);
+      Serial.print(250, DEC);
       Serial.print("\t");
       for (j=1; j<4; j++){
         // print result
@@ -107,18 +107,21 @@ void loop(){
         tmp = RECorFact(tmp, ENGINE_TYPE);
         // normalize to 250rpm
         tmp = NormTo250(tmp, results[i][0], ENGINE_TYPE);
-        Serial.print(tmp, 3);
+        // look for max value over all results
+        if(face[j-1] < tmp) face[j-1] = tmp;
+        Serial.print(String(tmp));
         Serial.print("\t");
       }
       Serial.println();
     } 
     Serial.println("----------------------------");
+    Serial.println("Max values:");
     Serial.print("@250:\t");
-    Serial.print(AdcToPres(face[0],SHOWBAR), 1);
+    PrintPres(face[0], SHOWBAR);
     Serial.print("\t");
-    Serial.print(AdcToPres(face[1],SHOWBAR), 1);
+    PrintPres(face[1], SHOWBAR);
     Serial.print("\t");
-    Serial.print(AdcToPres(face[2],SHOWBAR), 1);
+    PrintPres(face[2], SHOWBAR);
     Serial.print("\t");
     Serial.println();
     Serial.println();
