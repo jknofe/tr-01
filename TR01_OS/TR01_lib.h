@@ -91,8 +91,8 @@ void TestNormTo250(){
 #endif
 
 // convert ADC value (0-1023) to physical pressure for 200psi sensor
-// 0.5V - 4.5V -> 0bar to 13.79bar
-// 0.5V - 4.5V -> 0psi to 200psi
+// 0.5V - 4.5V -> 0bar to 13.79bar -> return fixpoint 1 = 1mBar
+// 0.5V - 4.5V -> 0psi to 200psi   -> return fixpoint 1 = 10mPsi
 int AdcToPres(int x, bool show_bar)
 {
 	// only accept adc values in sensor defined range 0.5 - 4.5V
