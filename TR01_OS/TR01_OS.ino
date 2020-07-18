@@ -1,6 +1,16 @@
 /*TR-01 Rotary Compression Tester
   Originally distributed by John Doss 2017
+  Some math parts were originally distributed by to Rotary Compression Calculator http://foxed.ca/index.php?page=rotarycalc
 
+  Rewrite by jknofe using corrected math, fixed pioint operation,
+  included rmp nomalization and sensors volume correction.
+
+  rpm correction is based on 13B RX8 and 12B RX7 workshop manuals
+
+  Hardware: Sparkfun Arduino Pro Micro 5V 16MHz
+
+  addional option to meassure presssures like oil continuously.
+  
   This code assumes you're using a 0-200 psi - 0.5-4.5 vdc pressure transducer connected to the AI0 pin.
   You can use sensors with other pressure or voltage ranges but you'll need to modify the code.
 */
@@ -36,9 +46,10 @@ float final_results[3] = {0.0};
 
 void setup() {
   Serial.begin(19200);      //serial speed
-  delay(500);               //hang out for half a second
+  delay(5000);               //hang out for 5 seconds to give use time to open shell
 
-  Serial.println("Start.");
+  Serial.println("TR-01 Rotary Compression Tester");
+  Serial.println("-------------------------------");
 
 #if OILPRES == 1
   cli();//stop interrupts
